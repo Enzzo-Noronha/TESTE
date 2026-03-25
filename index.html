@@ -1,562 +1,673 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#0f0f14" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>MeuApp</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#0f0f14" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <title>MeuApp</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="manifest" href="manifest.json" />
 
-  <style>
-    :root {
-      --bg: #0f0f14;
-      --surface: #1a1a24;
-      --card: #222230;
-      --accent: #7c5cfc;
-      --accent2: #fc5c8a;
-      --text: #f0eeff;
-      --muted: #8888aa;
-      --border: rgba(255,255,255,0.07);
-      --radius: 18px;
-      --nav-h: 68px;
-    }
+    <style>
+      :root {
+        --bg: #0f0f14;
+        --surface: #1a1a24;
+        --card: #222230;
+        --accent: #7c5cfc;
+        --accent2: #fc5c8a;
+        --text: #f0eeff;
+        --muted: #8888aa;
+        --border: rgba(255, 255, 255, 0.07);
+        --radius: 18px;
+        --nav-h: 68px;
+      }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100dvh;
-      max-width: 430px;
-      margin: 0 auto;
-      position: relative;
-      overflow-x: hidden;
-    }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100dvh;
+        max-width: 430px;
+        margin: 0 auto;
+        position: relative;
+        overflow-x: hidden;
+      }
 
-    /* ── SCREENS ── */
-    .screen {
-      display: none;
-      flex-direction: column;
-      min-height: 100dvh;
-      padding-bottom: var(--nav-h);
-      animation: fadeUp .35s ease;
-    }
-    .screen.active { display: flex; }
+      /* ── SCREENS ── */
+      .screen {
+        display: none;
+        flex-direction: column;
+        min-height: 100dvh;
+        padding-bottom: var(--nav-h);
+        animation: fadeUp 0.35s ease;
+      }
+      .screen.active {
+        display: flex;
+      }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-    /* ── HEADER ── */
-    .header {
-      padding: 56px 24px 20px;
-      background: linear-gradient(180deg, var(--bg) 60%, transparent);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .header h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: 26px;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .avatar {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 15px;
-      color: #fff;
-      flex-shrink: 0;
-    }
+      /* ── HEADER ── */
+      .header {
+        padding: 56px 24px 20px;
+        background: linear-gradient(180deg, var(--bg) 60%, transparent);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header h1 {
+        font-family: "Syne", sans-serif;
+        font-size: 26px;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 15px;
+        color: #fff;
+        flex-shrink: 0;
+      }
 
-    /* ── SCROLL AREA ── */
-    .scroll-area {
-      flex: 1;
-      overflow-y: auto;
-      padding: 0 20px 24px;
-      -webkit-overflow-scrolling: touch;
-    }
+      /* ── SCROLL AREA ── */
+      .scroll-area {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0 20px 24px;
+        -webkit-overflow-scrolling: touch;
+      }
 
-    /* ── BANNER ── */
-    .banner {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .banner::before {
-      content: '';
-      position: absolute;
-      right: -20px; top: -20px;
-      width: 130px; height: 130px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.12);
-    }
-    .banner h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .banner p { font-size: 13px; opacity: .85; line-height: 1.5; }
-    .banner-btn {
-      margin-top: 16px;
-      background: rgba(255,255,255,.2);
-      border: 1px solid rgba(255,255,255,.35);
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 9px 18px;
-      border-radius: 50px;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      transition: background .2s;
-    }
-    .banner-btn:hover { background: rgba(255,255,255,.3); }
+      /* ── BANNER ── */
+      .banner {
+        background: linear-gradient(
+          135deg,
+          var(--accent) 0%,
+          var(--accent2) 100%
+        );
+        border-radius: var(--radius);
+        padding: 24px;
+        margin-bottom: 24px;
+        position: relative;
+        overflow: hidden;
+      }
+      .banner::before {
+        content: "";
+        position: absolute;
+        right: -20px;
+        top: -20px;
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+      }
+      .banner h2 {
+        font-family: "Syne", sans-serif;
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .banner p {
+        font-size: 13px;
+        opacity: 0.85;
+        line-height: 1.5;
+      }
+      .banner-btn {
+        margin-top: 16px;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
+        font-family: "DM Sans", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 9px 18px;
+        border-radius: 50px;
+        cursor: pointer;
+        backdrop-filter: blur(6px);
+        transition: background 0.2s;
+      }
+      .banner-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
 
-    /* ── SECTION LABEL ── */
-    .section-label {
-      font-family: 'Syne', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      margin-top: 4px;
-    }
+      /* ── SECTION LABEL ── */
+      .section-label {
+        font-family: "Syne", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        margin-top: 4px;
+      }
 
-    /* ── CARDS GRID ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 16px;
-    }
-    .stat-icon {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-    .stat-value {
-      font-family: 'Syne', sans-serif;
-      font-size: 24px;
-      font-weight: 800;
-    }
-    .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+      /* ── CARDS GRID ── */
+      .cards-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .stat-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 18px 16px;
+      }
+      .stat-icon {
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+      .stat-value {
+        font-family: "Syne", sans-serif;
+        font-size: 24px;
+        font-weight: 800;
+      }
+      .stat-label {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
 
-    /* ── LIST ── */
-    .list-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: transform .15s, background .15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .list-item:active { transform: scale(0.97); background: #2a2a3a; }
-    .item-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-    .item-info { flex: 1; min-width: 0; }
-    .item-title {
-      font-family: 'Syne', sans-serif;
-      font-weight: 600;
-      font-size: 14px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .item-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .item-badge {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 9px;
-      border-radius: 50px;
-    }
+      /* ── LIST ── */
+      .list-item {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          background 0.15s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .list-item:active {
+        transform: scale(0.97);
+        background: #2a2a3a;
+      }
+      .item-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .item-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .item-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .item-sub {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .item-badge {
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 50px;
+      }
 
-    /* ── EXPLORE SCREEN ── */
-    .search-bar {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      cursor: text;
-    }
-    .search-bar input {
-      background: none;
-      border: none;
-      outline: none;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      flex: 1;
-    }
-    .search-bar input::placeholder { color: var(--muted); }
-    .chips {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      margin-bottom: 20px;
-      scrollbar-width: none;
-    }
-    .chips::-webkit-scrollbar { display: none; }
-    .chip {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 7px 16px;
-      font-size: 13px;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: background .15s, border-color .15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .chip.active, .chip:active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
+      /* ── EXPLORE SCREEN ── */
+      .search-bar {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 12px 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+        cursor: text;
+      }
+      .search-bar input {
+        background: none;
+        border: none;
+        outline: none;
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 14px;
+        flex: 1;
+      }
+      .search-bar input::placeholder {
+        color: var(--muted);
+      }
+      .chips {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        margin-bottom: 20px;
+        scrollbar-width: none;
+      }
+      .chips::-webkit-scrollbar {
+        display: none;
+      }
+      .chip {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 7px 16px;
+        font-size: 13px;
+        white-space: nowrap;
+        cursor: pointer;
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .chip.active,
+      .chip:active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
 
-    /* ── PROFILE SCREEN ── */
-    .profile-hero {
-      padding: 56px 24px 28px;
-      text-align: center;
-    }
-    .profile-avatar {
-      width: 88px; height: 88px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-size: 32px;
-      font-weight: 800;
-      margin: 0 auto 14px;
-      box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--accent);
-    }
-    .profile-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-    }
-    .profile-email { color: var(--muted); font-size: 13px; margin-top: 4px; }
-    .settings-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: background .15s;
-    }
-    .settings-item:active { background: #2a2a3a; }
-    .settings-icon { font-size: 20px; }
-    .settings-label { flex: 1; font-size: 14px; font-weight: 500; }
-    .settings-arrow { color: var(--muted); font-size: 18px; }
+      /* ── PROFILE SCREEN ── */
+      .profile-hero {
+        padding: 56px 24px 28px;
+        text-align: center;
+      }
+      .profile-avatar {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Syne", sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        margin: 0 auto 14px;
+        box-shadow:
+          0 0 0 4px var(--bg),
+          0 0 0 6px var(--accent);
+      }
+      .profile-name {
+        font-family: "Syne", sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+      }
+      .profile-email {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 4px;
+      }
+      .settings-item {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .settings-item:active {
+        background: #2a2a3a;
+      }
+      .settings-icon {
+        font-size: 20px;
+      }
+      .settings-label {
+        flex: 1;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .settings-arrow {
+        color: var(--muted);
+        font-size: 18px;
+      }
 
-    /* ── BOTTOM NAV ── */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 430px;
-      height: var(--nav-h);
-      background: rgba(15,15,20,.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      z-index: 100;
-      padding-bottom: env(safe-area-inset-bottom);
-    }
-    .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      padding: 8px 0;
-      -webkit-tap-highlight-color: transparent;
-      transition: opacity .15s;
-    }
-    .nav-item:active { opacity: .6; }
-    .nav-icon {
-      font-size: 22px;
-      transition: transform .2s;
-    }
-    .nav-label {
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--muted);
-      transition: color .2s;
-    }
-    .nav-item.active .nav-icon { transform: scale(1.15); }
-    .nav-item.active .nav-label { color: var(--accent); }
+      /* ── BOTTOM NAV ── */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 430px;
+        height: var(--nav-h);
+        background: rgba(15, 15, 20, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        z-index: 100;
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      .nav-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        padding: 8px 0;
+        -webkit-tap-highlight-color: transparent;
+        transition: opacity 0.15s;
+      }
+      .nav-item:active {
+        opacity: 0.6;
+      }
+      .nav-icon {
+        font-size: 22px;
+        transition: transform 0.2s;
+      }
+      .nav-label {
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--muted);
+        transition: color 0.2s;
+      }
+      .nav-item.active .nav-icon {
+        transform: scale(1.15);
+      }
+      .nav-item.active .nav-label {
+        color: var(--accent);
+      }
 
-    /* ── TOAST ── */
-    .toast {
-      position: fixed;
-      bottom: calc(var(--nav-h) + 16px);
-      left: 50%; transform: translateX(-50%) translateY(10px);
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 13px;
-      padding: 10px 20px;
-      border-radius: 50px;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity .25s, transform .25s;
-      pointer-events: none;
-      z-index: 200;
-    }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  </style>
-</head>
-<body>
+      /* ── TOAST ── */
+      .toast {
+        position: fixed;
+        bottom: calc(var(--nav-h) + 16px);
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background: var(--card);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 13px;
+        padding: 10px 20px;
+        border-radius: 50px;
+        white-space: nowrap;
+        opacity: 0;
+        transition:
+          opacity 0.25s,
+          transform 0.25s;
+        pointer-events: none;
+        z-index: 200;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HOME SCREEN -->
+    <div class="screen active" id="screen-home">
+      <div class="header">
+        <div class="header-row">
+          <h1>MeuApp</h1>
+          <div class="avatar">JS</div>
+        </div>
+      </div>
+      <div class="scroll-area">
+        <div class="banner">
+          <h2>Bem-vindo de volta! 👋</h2>
+          <p>Seu app mobile feito com HTML, CSS e JavaScript puro.</p>
+          <button class="banner-btn" onclick="showToast('Iniciando...')">
+            Começar agora
+          </button>
+        </div>
 
-  <!-- HOME SCREEN -->
-  <div class="screen active" id="screen-home">
-    <div class="header">
-      <div class="header-row">
-        <h1>MeuApp</h1>
-        <div class="avatar">JS</div>
+        <div class="section-label">Estatísticas</div>
+        <div class="cards-grid">
+          <div class="stat-card">
+            <div class="stat-icon">📱</div>
+            <div class="stat-value">47</div>
+            <div class="stat-label">Sessões</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-value">98%</div>
+            <div class="stat-label">Performance</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-value">12</div>
+            <div class="stat-label">Metas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-value">5</div>
+            <div class="stat-label">Conquistas</div>
+          </div>
+        </div>
+
+        <div class="section-label">Atividade recente</div>
+        <div class="list-item" onclick="showToast('Item selecionado!')">
+          <div class="item-icon" style="background: #7c5cfc22">🚀</div>
+          <div class="item-info">
+            <div class="item-title">Projeto lançado</div>
+            <div class="item-sub">Há 2 horas</div>
+          </div>
+          <div class="item-badge">Novo</div>
+        </div>
+        <div class="list-item" onclick="showToast('Item selecionado!')">
+          <div class="item-icon" style="background: #fc5c8a22">🎨</div>
+          <div class="item-info">
+            <div class="item-title">Design atualizado</div>
+            <div class="item-sub">Ontem às 14h</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="showToast('Item selecionado!')">
+          <div class="item-icon" style="background: #5cfc9022">✅</div>
+          <div class="item-info">
+            <div class="item-title">Meta concluída</div>
+            <div class="item-sub">2 dias atrás</div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="scroll-area">
-      <div class="banner">
-        <h2>Bem-vindo de volta! 👋</h2>
-        <p>Seu app mobile feito com HTML, CSS e JavaScript puro.</p>
-        <button class="banner-btn" onclick="showToast('Iniciando...')">Começar agora</button>
-      </div>
 
-      <div class="section-label">Estatísticas</div>
-      <div class="cards-grid">
-        <div class="stat-card">
-          <div class="stat-icon">📱</div>
-          <div class="stat-value">47</div>
-          <div class="stat-label">Sessões</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">⚡</div>
-          <div class="stat-value">98%</div>
-          <div class="stat-label">Performance</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🎯</div>
-          <div class="stat-value">12</div>
-          <div class="stat-label">Metas</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🏆</div>
-          <div class="stat-value">5</div>
-          <div class="stat-label">Conquistas</div>
+    <!-- EXPLORE SCREEN -->
+    <div class="screen" id="screen-explore">
+      <div class="header">
+        <div class="header-row">
+          <h1>Explorar</h1>
         </div>
       </div>
+      <div class="scroll-area">
+        <div class="search-bar">
+          <span>🔍</span>
+          <input type="text" placeholder="Pesquisar..." />
+        </div>
+        <div class="chips">
+          <div class="chip active">Todos</div>
+          <div class="chip" onclick="chipToggle(this)">Design</div>
+          <div class="chip" onclick="chipToggle(this)">Código</div>
+          <div class="chip" onclick="chipToggle(this)">Mobile</div>
+          <div class="chip" onclick="chipToggle(this)">Web</div>
+        </div>
 
-      <div class="section-label">Atividade recente</div>
-      <div class="list-item" onclick="showToast('Item selecionado!')">
-        <div class="item-icon" style="background:#7c5cfc22">🚀</div>
-        <div class="item-info">
-          <div class="item-title">Projeto lançado</div>
-          <div class="item-sub">Há 2 horas</div>
+        <div class="section-label">Destaques</div>
+        <div class="list-item" onclick="showToast('Abrindo...')">
+          <div class="item-icon" style="background: #7c5cfc22">🌐</div>
+          <div class="item-info">
+            <div class="item-title">PWA — Apps sem loja</div>
+            <div class="item-sub">Instale direto pelo navegador</div>
+          </div>
         </div>
-        <div class="item-badge">Novo</div>
-      </div>
-      <div class="list-item" onclick="showToast('Item selecionado!')">
-        <div class="item-icon" style="background:#fc5c8a22">🎨</div>
-        <div class="item-info">
-          <div class="item-title">Design atualizado</div>
-          <div class="item-sub">Ontem às 14h</div>
+        <div class="list-item" onclick="showToast('Abrindo...')">
+          <div class="item-icon" style="background: #fc5c8a22">📦</div>
+          <div class="item-info">
+            <div class="item-title">Capacitor</div>
+            <div class="item-sub">HTML/JS em app nativo</div>
+          </div>
         </div>
-      </div>
-      <div class="list-item" onclick="showToast('Item selecionado!')">
-        <div class="item-icon" style="background:#5cfc9022">✅</div>
-        <div class="item-info">
-          <div class="item-title">Meta concluída</div>
-          <div class="item-sub">2 dias atrás</div>
+        <div class="list-item" onclick="showToast('Abrindo...')">
+          <div class="item-icon" style="background: #5caafc22">⚡</div>
+          <div class="item-info">
+            <div class="item-title">Ionic Framework</div>
+            <div class="item-sub">Componentes mobile nativos</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="showToast('Abrindo...')">
+          <div class="item-icon" style="background: #fcaa5c22">🔧</div>
+          <div class="item-info">
+            <div class="item-title">Cordova</div>
+            <div class="item-sub">Plugin nativo via JS</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- EXPLORE SCREEN -->
-  <div class="screen" id="screen-explore">
-    <div class="header">
-      <div class="header-row">
-        <h1>Explorar</h1>
+    <!-- PROFILE SCREEN -->
+    <div class="screen" id="screen-profile">
+      <div class="profile-hero">
+        <div class="profile-avatar">JS</div>
+        <div class="profile-name">João Silva</div>
+        <div class="profile-email">joao@email.com</div>
       </div>
-    </div>
-    <div class="scroll-area">
-      <div class="search-bar">
-        <span>🔍</span>
-        <input type="text" placeholder="Pesquisar..." />
-      </div>
-      <div class="chips">
-        <div class="chip active">Todos</div>
-        <div class="chip" onclick="chipToggle(this)">Design</div>
-        <div class="chip" onclick="chipToggle(this)">Código</div>
-        <div class="chip" onclick="chipToggle(this)">Mobile</div>
-        <div class="chip" onclick="chipToggle(this)">Web</div>
-      </div>
-
-      <div class="section-label">Destaques</div>
-      <div class="list-item" onclick="showToast('Abrindo...')">
-        <div class="item-icon" style="background:#7c5cfc22">🌐</div>
-        <div class="item-info">
-          <div class="item-title">PWA — Apps sem loja</div>
-          <div class="item-sub">Instale direto pelo navegador</div>
+      <div class="scroll-area">
+        <div class="section-label">Configurações</div>
+        <div class="settings-item" onclick="showToast('Abrindo conta...')">
+          <span class="settings-icon">👤</span>
+          <span class="settings-label">Minha conta</span>
+          <span class="settings-arrow">›</span>
         </div>
-      </div>
-      <div class="list-item" onclick="showToast('Abrindo...')">
-        <div class="item-icon" style="background:#fc5c8a22">📦</div>
-        <div class="item-info">
-          <div class="item-title">Capacitor</div>
-          <div class="item-sub">HTML/JS em app nativo</div>
+        <div
+          class="settings-item"
+          onclick="showToast('Abrindo notificações...')"
+        >
+          <span class="settings-icon">🔔</span>
+          <span class="settings-label">Notificações</span>
+          <span class="settings-arrow">›</span>
         </div>
-      </div>
-      <div class="list-item" onclick="showToast('Abrindo...')">
-        <div class="item-icon" style="background:#5caafc22">⚡</div>
-        <div class="item-info">
-          <div class="item-title">Ionic Framework</div>
-          <div class="item-sub">Componentes mobile nativos</div>
+        <div class="settings-item" onclick="showToast('Abrindo aparência...')">
+          <span class="settings-icon">🎨</span>
+          <span class="settings-label">Aparência</span>
+          <span class="settings-arrow">›</span>
         </div>
-      </div>
-      <div class="list-item" onclick="showToast('Abrindo...')">
-        <div class="item-icon" style="background:#fcaa5c22">🔧</div>
-        <div class="item-info">
-          <div class="item-title">Cordova</div>
-          <div class="item-sub">Plugin nativo via JS</div>
+        <div
+          class="settings-item"
+          onclick="showToast('Abrindo privacidade...')"
+        >
+          <span class="settings-icon">🔒</span>
+          <span class="settings-label">Privacidade</span>
+          <span class="settings-arrow">›</span>
+        </div>
+        <div class="settings-item" onclick="showToast('Saindo...')">
+          <span class="settings-icon">🚪</span>
+          <span class="settings-label" style="color: #fc5c8a">Sair</span>
+          <span class="settings-arrow">›</span>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- PROFILE SCREEN -->
-  <div class="screen" id="screen-profile">
-    <div class="profile-hero">
-      <div class="profile-avatar">JS</div>
-      <div class="profile-name">João Silva</div>
-      <div class="profile-email">joao@email.com</div>
-    </div>
-    <div class="scroll-area">
-      <div class="section-label">Configurações</div>
-      <div class="settings-item" onclick="showToast('Abrindo conta...')">
-        <span class="settings-icon">👤</span>
-        <span class="settings-label">Minha conta</span>
-        <span class="settings-arrow">›</span>
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <div class="nav-item active" onclick="navigate('home', this)">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Início</span>
       </div>
-      <div class="settings-item" onclick="showToast('Abrindo notificações...')">
-        <span class="settings-icon">🔔</span>
-        <span class="settings-label">Notificações</span>
-        <span class="settings-arrow">›</span>
+      <div class="nav-item" onclick="navigate('explore', this)">
+        <span class="nav-icon">🔍</span>
+        <span class="nav-label">Explorar</span>
       </div>
-      <div class="settings-item" onclick="showToast('Abrindo aparência...')">
-        <span class="settings-icon">🎨</span>
-        <span class="settings-label">Aparência</span>
-        <span class="settings-arrow">›</span>
+      <div class="nav-item" onclick="navigate('profile', this)">
+        <span class="nav-icon">👤</span>
+        <span class="nav-label">Perfil</span>
       </div>
-      <div class="settings-item" onclick="showToast('Abrindo privacidade...')">
-        <span class="settings-icon">🔒</span>
-        <span class="settings-label">Privacidade</span>
-        <span class="settings-arrow">›</span>
-      </div>
-      <div class="settings-item" onclick="showToast('Saindo...')">
-        <span class="settings-icon">🚪</span>
-        <span class="settings-label" style="color:#fc5c8a">Sair</span>
-        <span class="settings-arrow">›</span>
-      </div>
-    </div>
-  </div>
+    </nav>
 
-  <!-- BOTTOM NAV -->
-  <nav class="bottom-nav">
-    <div class="nav-item active" onclick="navigate('home', this)">
-      <span class="nav-icon">🏠</span>
-      <span class="nav-label">Início</span>
-    </div>
-    <div class="nav-item" onclick="navigate('explore', this)">
-      <span class="nav-icon">🔍</span>
-      <span class="nav-label">Explorar</span>
-    </div>
-    <div class="nav-item" onclick="navigate('profile', this)">
-      <span class="nav-icon">👤</span>
-      <span class="nav-label">Perfil</span>
-    </div>
-  </nav>
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
 
-  <!-- TOAST -->
-  <div class="toast" id="toast"></div>
+    <script>
+      function navigate(screen, el) {
+        document
+          .querySelectorAll(".screen")
+          .forEach((s) => s.classList.remove("active"));
+        document
+          .querySelectorAll(".nav-item")
+          .forEach((n) => n.classList.remove("active"));
+        document.getElementById("screen-" + screen).classList.add("active");
+        el.classList.add("active");
+      }
 
-  <script>
-    function navigate(screen, el) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      document.getElementById('screen-' + screen).classList.add('active');
-      el.classList.add('active');
-    }
+      let toastTimer;
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+      }
 
-    let toastTimer;
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
-    }
-
-    function chipToggle(el) {
-      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-      el.classList.add('active');
-    }
-  </script>
-</body>
+      function chipToggle(el) {
+        document
+          .querySelectorAll(".chip")
+          .forEach((c) => c.classList.remove("active"));
+        el.classList.add("active");
+      }
+    </script>
+  </body>
 </html>
